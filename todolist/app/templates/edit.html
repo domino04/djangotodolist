@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'new.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do-list</title>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="toptop">EDIT YOUR LIST!</div>
+            <div class="top"></div>
+            <div class="main">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="main-1">
+                <div class="input">
+                    <input type="text" name="title" value="{{ list.title }}">
+                </div>
+                <div class="input">   
+                    <input type="text" name="content" value="{{ list.content }}">
+                </div>
+                <div class="input">
+                    <input type="datetime-local" value="{{ list.duedate }}">
+                </div>
+                <div class="add">
+                    <button type="submit">REPOST</button>
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
