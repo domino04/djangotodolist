@@ -10,12 +10,24 @@
     <title>To-do-list</title>
 </head>
 <body>
+    <div class="nav-bar">
+        <a class="nav-item" href="{% url 'home' %}">HOME</a>
+        {% if user.is_authenticated %}
+        <div class="nav-item">안녕하세요, {{ user.username }}님</div>
+        <a class="nav-item" href="{% url 'logout' %}">로그아웃</a>
+        {% endif %}
+        <a class="nav-item" href="{% url 'login' %}">로그인</a>
+        <a class="nav-item" href="{% url 'signup' %}">회원가입</a>
+      </div>
+      {% block content %}
+      {% endblock content %}
+
     <div class="container">
         <div class="box">
             <div class="toptop">ADD NEW LIST!</div>
             <div class="top"></div>
             <div class="main">
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="main-1">
                 <div class="input">
@@ -27,9 +39,14 @@
                 <div class="input">
                     <input type="datetime-local" name="duedate">
                 </div>
+                <div class="input">
+                    <input type="file" name="img">
+                </div>
+                </div>
                 <div class="add">
                     <button type="submit">POST</button>
                 </div>
+
             </div>
             </form>
             </div>

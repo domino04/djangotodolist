@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>detail</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mylist.css' %}">
+</head>
+<body>
+  <h1>[my page 관리]</h1>
+  <div class="total">
+    <div class="left">
+    <h1>the list of my post</h1>
+    {% for list in lists %}
+      {% if user.is_authenticated and post.author.pk == user.pk %}
+      <div class="mylist">
+        <div class="mylist_1">
+          <h3><a href="{% url 'detail' post.pk %}">{{ list.title }}</a></h3>
+        </div>
+        <div class="mylist_2">
+          <h4>{{ list.content }}</h4>
+        </div>
+      </div>  
+      {% endif %}
+    {% endfor %}
+    </div>
+    <div class="right">
+    <h1>the list of my comment</h1>
+    {% for list in lists %}
+      {% for comment in list.comments.all %}
+        {% if user.is_authenticated and comment.author.pk == user.pk %}
+        <div class="mylist_comment">
+          <h3>내 댓글: {{ comment.content }}</h3>
+          <h4>해당 게시물: <a href="{% url 'detail' list.pk %}">{{ list.title }}</a></h4>
+        </div>
+        {% endif %}  
+      {% endfor %}  
+    {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
